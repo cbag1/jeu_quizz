@@ -1,8 +1,8 @@
-<div class="container-fluid r-head">
-    <div class="row justify-content-center">
+<div class="container-fluid ">
+    <div class="row justify-content-center" style="height:15vh;">
         <!-- col-3 col-md-5 col-lg-3  -->
         <div class="col-sm-3">
-            <img src="../public/images/logo-QuizzSA.png" alt="" class="img-logo">
+            <img src="./public/images/logo-QuizzSA.png" alt="" class="img-logo">
         </div>
         <!-- col-9 col-sm-6 col-md-7 col-lg-9 -->
         <div class=" col-sm-9 text-desc">
@@ -11,38 +11,18 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 bg-success p-user">
+<div class="container-fluid" >
+    <div class="row" style="height:85vh;">
+        <div class="col-3 bg-primary h-100">
             <img src="../public/images/cbag.png" alt="" class="img-user">
         </div>
-        <div class="col-sm-9 " >
+        <div class="col-9 container w-100 shadow-sm bg-light rounded">
             <!-- <div class="row bg-success" style="height:50%;">aa</div>
                     <div class="row bg-active"  style="height:50%;">fff</div> -->
             <?php
-            if (isset($_GET['menu'])) {
-                switch ($_GET['menu*']) {
-                    case 'ajoutquest':
-                        require_once("./pages/AjoutQuest.php");
-                        break;
 
-                    case 'listejoueurs':
-                        require_once("./pages/admin.php");
-                        break;
+            require_once("./pages/menu.php");
 
-                    case 'ajoutadmin':
-                        require_once("./pages/inscription.php");
-                        break;
-                    case 'listequest':
-                        require_once("./pages/inscription.php");
-                        break;
-                }
-            } else {
-                // if (isset($_GET['statut']) && $_GET['statut']==="logout") {
-                //     deconnexion();
-                // }
-                require_once("./pages/menu.php");
-            }
             ?>
 
 

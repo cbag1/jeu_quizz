@@ -5,7 +5,7 @@
     });
   });
 </script>
-<div id="chargement">
+<div >
   <div><a role="button" id="ret">Retour</a></div>
   <div>
     <form method="post">
@@ -17,15 +17,16 @@
       <br>
       <br>
       <select name="type_quest" id="type_quest">
-        <option value="quest_simple">Question Simple</option>
-        <option value="quest_multiple">Question Multiple</option>
-        <option value="quest_texte">Question Texte</option>
+        <option value="simple">Question Simple</option>
+        <option value="multiple">Question Multiple</option>
+        <option value="texte">Question Texte</option>
       </select>
 
       <input type="button" id="ajout" value="+">
       <br>
       <div id="reponses"></div>
-      <input type="submit" id="but_submit" value="Enregistrer"/>
+      <div id="message"></div>
+      <input type="submit" id="but_submit" value="Enregistrer" />
     </form>
   </div>
 </div>
@@ -37,62 +38,53 @@
     var choix = "";
     $("#type_quest").change(function(e) {
       choix = $(this).children("option:selected").val();
-      // nbRep = 0;
+      nbRep = 0;
       $("#reponses").html("");
     });
 
     $("#ajout").click(function(e) {
-      nbRep++;
-      if (choix == "quest_simple") {
+
+      if (choix == "simple") {
         $("#reponses").append(`<div id='row_${nbRep}'>
-          <input type="text" id='rep_${nbRep}' />
-          <input type="radio" id='${nbRep}' />
+          <input type="text" class='rep_${nbRep}' name='rep_${nbRep}'/>
+          <input type="radio" id='${nbRep}' name='radio' value='${nbRep}' />
           </div>`);
-      } else if (choix == "quest_multiple") {
+      } else if (choix == "multiple") {
         $("#reponses").append(`<div id='row_${nbRep}'>
           <input type="text" name='rep_${nbRep}' id='rep_${nbRep}' />
-          <input type="checkbox" id='check[]' name='check' value='${nbRep}' />
+          <input type="checkbox" id='check_${nbRep}' name='check_${nbRep}' value='${nbRep}' />
           </div>`);
-      } else if (choix == "quest_texte") {
+      } else if (choix == "texte") {
         $("#reponses").append(`<div id='row_${nbRep}'>
-          <input type="text" id='rep_${nbRep}'>
+          <input type="text" id='rep_texte' name='rep_texte'>
           </div>`);
 
       }
-      // $("#reponses").append(`<div id='test'>
-      //     <input type="text" id='rep_${test}'>
-
-      //     </div>`);
+      nbRep++;
     });
 
     $("#but_submit").click(function(e) {
       e.preventDefault();
-      // var username = $("#user").val().trim();
-      // var password = $("#pwd").val().trim();
-      //alert(" Coole boy");
-      var val=$("form").serialize();
-      alert(val);
-      
-      // alert("Votre langage de programmation préféré est: " + langPref.join(", "));
 
       // if (username != "" && password != "") {
-      //   $.ajax({
-      //     url: './data/insertQuestion.php',
-      //     type: 'POST',
-      //     data: {
-      //       username: username,
-      //       password: password
-      //     },
-      //     success: function(response) {
-      //       var msg = "";
-      //       if (response == "error") {
-      //         msg = "Invalid username and password!";
-      //       } else {
-      //         window.location = "index.php?lien=" + response;
-      //       }
-      //       $("#message").html(msg);
-      //     }
-      //   });
+      $.ajax({
+        url: './data/insertQuestion.php',
+        type: 'POST',
+        data: {
+          formulaire: $("form").serialize(),
+          nbrep: nbRep
+        },
+        success: function(response) {
+          var msg = "";
+          if (response == "error") {
+            msg = "Invalid username and password!";
+          } else {
+            // window.location = "index.php?lien=" + response;
+            msg = response;
+          }
+          $("#message").html(msg);
+        }
+      });
       // } else {
       //   alert('Champ Vide');
       // }
