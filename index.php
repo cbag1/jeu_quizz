@@ -31,7 +31,7 @@
                     break;
 
                 case 'joueur':
-                    require_once("./pages/admin.php");
+                    require_once("./pages/joueur.php");
                     break;
 
                 case 'inscription_joueur':

@@ -65,6 +65,8 @@
 
     $("#but_submit").click(function(e) {
       e.preventDefault();
+      var envoie=true;
+      
 
       // if (username != "" && password != "") {
       $.ajax({
